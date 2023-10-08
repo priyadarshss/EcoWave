@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import styles from './page.module.css'
-import { Text, extendTheme } from '@chakra-ui/react'
+import { Text, Th, extendTheme } from '@chakra-ui/react'
 import { ChakraProvider } from '@chakra-ui/react'
 import Landing from '../pages/Landing'
 import SidebarWithHeader from '@/components/SidebarWithHeader'
