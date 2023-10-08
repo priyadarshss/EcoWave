@@ -65,13 +65,11 @@ const PricingCardContainer = () => {
   )
 }
 
-// Updated PricingCard component
 const PricingCard = ({ pricingData }) => {
   const price = pricingData.price.toString().split('.')
   const dollar = price[0]
   const cent = price[1] || '00'
 
-  // Define a mapping of tier titles to background colors, text colors, and box shadows
   const tierStyles = {
     Silver: {
       bg: 'green.100', // Light shade of green
@@ -90,7 +88,6 @@ const PricingCard = ({ pricingData }) => {
     },
   }
 
-  // Get the background color, text color, and box shadow based on the tier title
   const { bg, text, boxShadow } = tierStyles[pricingData.title] || { bg: 'green.100', text: 'black', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' };
 
   return (

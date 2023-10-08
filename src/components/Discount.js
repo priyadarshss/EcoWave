@@ -18,10 +18,10 @@ export default function ProductSimple() {
   return (
     <Flex direction='column' mt='32px'>
       {/* New Flex container for discount text */}
-      <Text textAlign='center' fontSize='32px' fontWeight={700} mt='200px'>
+      <Text textAlign='center' fontSize='32px' fontWeight={700} mt='100px'>
         Discount Coupons
       </Text>
-      <Flex justify='space-around' mt='100px' mb='100px'>
+      <Flex justify='space-around' mt='50px' mb='100px'>
         {/* First Coupon Card */}
         <Box
           role={'group'}

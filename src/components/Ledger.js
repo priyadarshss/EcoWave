@@ -190,7 +190,7 @@ const Ledger = () => {
             </Button>
           </Box>
         </HStack>
-        <TableContainer>
+        <TableContainer mt="50px">
           <Box borderRadius='5px' overflow='hidden'>
             <Table
               variant='striped'

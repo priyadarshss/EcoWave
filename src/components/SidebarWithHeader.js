@@ -24,7 +24,7 @@ import {
   MenuDivider,
 } from '@chakra-ui/react'
 // Here we have used react-icons package for the icons
-import { FaBell } from 'react-icons/fa'
+import { FaBell, FaTree } from 'react-icons/fa'
 import { AiOutlineTeam, AiOutlineHome } from 'react-icons/ai'
 import { BsFolder2, BsCalendarCheck } from 'react-icons/bs'
 import { FiBell, FiChevronDown, FiMenu } from 'react-icons/fi'
@@ -182,14 +182,14 @@ const SidebarContent = () => (
     w='60'
   >
     <Flex px='4' py='5' align='center'>
-      <Icon as={RiFlashlightFill} h={8} w={8} />
+      <Icon as={FaTree} h={8} w={8} color="green" />
       <Text
         fontSize='2xl'
         ml='2'
-        color={useColorModeValue('brand.500', 'white')}
+        color={useColorModeValue('green.600', 'white')}
         fontWeight='semibold'
       >
-        Logo
+        EcoWave
       </Text>
     </Flex>
     <Flex

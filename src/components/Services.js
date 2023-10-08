@@ -33,13 +33,14 @@ const ToggleRow = () => {
       display={'flex'}
       justifyContent={'center'}
       alignItems={'center'}
+      mt="100px"
     >
       <Stack direction='column' spacing={4} justifyContent='center'>
         <Text
           textAlign='center'
           fontSize={32}
           fontWeight={700}
-          mb='50px'
+          mb='30px'
           color='black'
         >
           Services Connected
@@ -78,7 +79,7 @@ const ToggleRow = () => {
           fontSize={32}
           textAlign='center'
           fontWeight={700}
-          mb='50px'
+          mb='30px'
           mt='100px'
           color='black'
         >
