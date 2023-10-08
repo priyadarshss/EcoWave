@@ -1,76 +1,133 @@
 import * as React from 'react'
-import { Container, Box, Text, VStack, TableContainer, Table, Thead, TableCaption, Tr, Th, Tbody, Td, Tfoot, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, HStack, Stepper, Step, StepIndicator, StepStatus, StepIcon, StepNumber, StepTitle, StepDescription, StepSeparator, useSteps } from '@chakra-ui/react'
+import {
+  Container,
+  Box,
+  Text,
+  VStack,
+  TableContainer,
+  Table,
+  Thead,
+  TableCaption,
+  Tr,
+  Th,
+  Tbody,
+  Td,
+  Tfoot,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  HStack,
+  Stepper,
+  Step,
+  StepIndicator,
+  StepStatus,
+  StepIcon,
+  StepNumber,
+  StepTitle,
+  StepDescription,
+  StepSeparator,
+  useSteps,
+} from '@chakra-ui/react'
 import Leaf from '../../public/images/Leaf.svg'
 import Image from 'next/image'
 import RewardTier from './RewardTier'
+const bent = require('bent')
+const getJSON = bent('GET', 'json')
+
+const { Framework } = require('@vechain/connex-framework')
+const { Driver, SimpleNet } = require('@vechain/connex-driver')
+const { ethers } = require('@vechain/ethers')
 
 const Ledger = () => {
-    const [isRewardTierModalOpen, setRewardTierModalOpen] = React.useState(false)
-    const dummyData = [
-      {
-        id: 1,
-        name: 'Planting Trees',
-        origin: 'Local Community',
-        dateTime: '2023-10-08 10:00 AM',
-        points: 20,
-      },
-      {
-        id: 2,
-        name: 'Recycling Drive',
-        origin: 'City Council',
-        dateTime: '2023-10-08 01:00 PM',
-        points: 15,
-      },
-      {
-        id: 3,
-        name: 'Energy Conservation Workshop',
-        origin: 'Green Energy Organization',
-        dateTime: '2023-10-09 09:30 AM',
-        points: 30,
-      },
-      {
-        id: 4,
-        name: 'Community Cleanup',
-        origin: 'Local Environmental Group',
-        dateTime: '2023-10-10 03:00 PM',
-        points: 25,
-      },
-      {
-        id: 5,
-        name: 'Sustainable Transportation Day',
-        origin: 'Transportation Authority',
-        dateTime: '2023-10-11 11:30 AM',
-        points: 15,
-      },
-      {
-        id: 6,
-        name: 'Eco-Friendly Product Expo',
-        origin: 'Environmental Innovation Hub',
-        dateTime: '2023-10-12 02:00 PM',
-        points: 35,
-      },
-      // Add more rows as needed
-    ]
+  const [isRewardTierModalOpen, setRewardTierModalOpen] = React.useState(false)
+  const dummyData = [
+    {
+      id: 1,
+      name: 'Planting Trees',
+      origin: 'Local Community',
+      dateTime: '2023-10-08 10:00 AM',
+      points: 20,
+    },
+    {
+      id: 2,
+      name: 'Recycling Drive',
+      origin: 'City Council',
+      dateTime: '2023-10-08 01:00 PM',
+      points: 15,
+    },
+    {
+      id: 3,
+      name: 'Energy Conservation Workshop',
+      origin: 'Green Energy Organization',
+      dateTime: '2023-10-09 09:30 AM',
+      points: 30,
+    },
+    {
+      id: 4,
+      name: 'Community Cleanup',
+      origin: 'Local Environmental Group',
+      dateTime: '2023-10-10 03:00 PM',
+      points: 25,
+    },
+    {
+      id: 5,
+      name: 'Sustainable Transportation Day',
+      origin: 'Transportation Authority',
+      dateTime: '2023-10-11 11:30 AM',
+      points: 15,
+    },
+    {
+      id: 6,
+      name: 'Eco-Friendly Product Expo',
+      origin: 'Environmental Innovation Hub',
+      dateTime: '2023-10-12 02:00 PM',
+      points: 35,
+    },
+    // Add more rows as needed
+  ]
 
-    const openRewardTierModal = () => {
-      setRewardTierModalOpen(true)
-    }
+  const openRewardTierModal = () => {
+    setRewardTierModalOpen(true)
+  }
 
-    const closeRewardTierModal = () => {
-      setRewardTierModalOpen(false)
-    }
+  const closeRewardTierModal = () => {
+    setRewardTierModalOpen(false)
+  }
 
-    const steps = [
-      { title: 'Bronze', description: 'Tier 1' },
-      { title: 'Silver', description: 'Tier 2' },
-      { title: 'Gold', description: 'Tier 3' },
-    ]
+  const steps = [
+    { title: 'Bronze', description: 'Tier 1' },
+    { title: 'Silver', description: 'Tier 2' },
+    { title: 'Gold', description: 'Tier 3' },
+  ]
 
-    const { activeStep } = useSteps({
-      index: 1,
-      count: steps.length,
-    })
+  const { activeStep } = useSteps({
+    index: 1,
+    count: steps.length,
+  })
 
+  const ABI_URL =
+    'https://raw.githubusercontent.com/shubhank-saxena/ecowave/master/ABIs/contract.json'
+  const CONTRACT_ADDRESS = '0x0000000000000000000000000123456E65726779'
+
+  async function getTotalSupply() {
+    const driver = await Driver.connect(
+      new SimpleNet('https://devnet.veblocks.net%22/')
+    )
+    const connex = new Framework(driver)
+
+    const abi = await getJSON(ABI_URL)
+    const getUserXP = abi.find(({ name }) => name === 'getUserXP')
+
+    const {
+      decoded: { 0: decodedUserXP },
+    } = await connex.thor.account(CONTRACT_ADDRESS).method(getUserXP).call()
+
+    return ethers.utils.formatEther(getUserXP)
+  }
 
   return (
     <Container
