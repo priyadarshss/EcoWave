@@ -33,12 +33,12 @@ const ToggleRow = () => {
       display={'flex'}
       justifyContent={'center'}
       alignItems={'center'}
-      mt="100px"
+      mt='100px'
     >
       <Stack direction='column' spacing={4} justifyContent='center'>
         <Text
           textAlign='center'
-          fontSize={32}
+          fontSize={36}
           fontWeight={700}
           mb='30px'
           color='black'
@@ -76,11 +76,11 @@ const ToggleRow = () => {
         </HStack>
         {/* second stack */}
         <Text
-          fontSize={32}
+          fontSize={36}
           textAlign='center'
           fontWeight={700}
           mb='30px'
-          mt='100px'
+          mt='200px'
           color='black'
         >
           Services to be connected by you

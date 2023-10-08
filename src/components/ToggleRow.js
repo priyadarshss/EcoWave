@@ -14,9 +14,10 @@ const ToggleRow = () => {
 
   return (
     <VStack
-      maxW='7xl'
+      maxW='6xl'
       px={{ base: 6, md: 3 }}
       py={24}
+      ml="10vw"
       bg='black'
       height='625px'
       color='white'

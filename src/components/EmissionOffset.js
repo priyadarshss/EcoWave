@@ -9,22 +9,28 @@ const ToggleRow = () => {
 
   return (
     <VStack mt='100px' mb='100px'>
-    <Text textAlign='center' color='black' fontSize={36} fontWeight={800} mb="20px">
+      <Text
+        textAlign='center'
+        color='black'
+        fontSize={40}
+        fontWeight={800}
+        mb='20px'
+      >
         Our Emission Offset Program
-    </Text>
-      <Text textAlign='center' color='black' mb="25px">
+      </Text>
+      <Text textAlign='center' color='black' mb='25px' fontSize={20}>
         By contributing to carbon neutrality projects, you can make an impact
         well beyond the scope of your company.
       </Text>
       <Stack direction='row' spacing={10} justifyContent='center'>
-        <Image src={Bus} alt='bus' height={500} />
+        <Image src={Bus} alt='bus' height={550} />
         <Image
           src={Plant}
           alt='plant'
-          height={500}
+          height={550}
           style={{ marginTop: '50px', marginBottom: '-50px' }}
         />
-        <Image src={Tree} alt='tree' height={500} />
+        <Image src={Tree} alt='tree' height={550} />
       </Stack>
     </VStack>
   )

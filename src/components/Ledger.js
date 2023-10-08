@@ -83,6 +83,7 @@ const Ledger = () => {
       display='flex'
       justifyContent='center'
       alignItems='center'
+      mt="100px"
     >
       <VStack>
         <HStack width='100%' display='flex' justifyContent='space-around'>
@@ -148,7 +149,8 @@ const Ledger = () => {
               mt='-15px'
               mb='25px'
               textAlign='center'
-              color='yellow.100'
+              color='gray.400'
+              fontWeight={800}
             >
               Silver
             </Text>
