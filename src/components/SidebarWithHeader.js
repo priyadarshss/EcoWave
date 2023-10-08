@@ -26,7 +26,7 @@ import {
 // Here we have used react-icons package for the icons
 import { FaBell, FaTree } from 'react-icons/fa'
 import { AiOutlineTeam, AiOutlineHome } from 'react-icons/ai'
-import { BsFolder2, BsCalendarCheck } from 'react-icons/bs'
+import { BsFolder2, BsCalendarCheck, BsChevronBarRight } from 'react-icons/bs'
 import { FiBell, FiChevronDown, FiMenu } from 'react-icons/fi'
 import { RiFlashlightFill } from 'react-icons/ri'
 import Landing from '../pages/Landing'
@@ -37,6 +37,7 @@ import { Web3Auth } from '@web3auth/modal'
 export default function Index() {
   const { isOpen, onClose, onOpen } = useDisclosure()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false) // Add state for sidebar visibility
 
   const web3auth = new Web3Auth({
     clientId:
@@ -51,37 +52,40 @@ export default function Index() {
 
   const initWeb3Auth = async () => {
     try {
-      await web3auth.initModal();
+      await web3auth.initModal()
     } catch (error) {
-      console.error('Error initializing web3auth modal:', error);
+      console.error('Error initializing web3auth modal:', error)
     }
-  };
+  }
 
   useEffect(() => {
     initWeb3Auth()
   }, [])
 
-//   await web3auth.initModal()
+  //   await web3auth.initModal()
 
-   const handleLogin = async () => {
+  const handleLogin = async () => {
     try {
-      await web3auth.connect();
-      setIsLoggedIn(true);
+      await web3auth.connect()
+      setIsLoggedIn(true)
     } catch (error) {
-      console.error('Error connecting to web3auth:', error);
+      console.error('Error connecting to web3auth:', error)
     }
-  };
+  }
 
   return (
     <Box as='section' bg='white' minH='100vh'>
-      <SidebarContent display={{ base: 'none', md: 'unset' }} />
+      <SidebarContent
+        display={{ base: 'none', md: 'unset' }}
+        isOpen={isSidebarOpen} // Pass isOpen prop to SidebarContent
+      />
       <Drawer isOpen={isOpen} onClose={onClose} placement='left'>
         <DrawerOverlay />
         <DrawerContent>
-          <SidebarContent w='full' borderRight='none' />
+          <SidebarContent w='full' borderRight='none' isOpen={true} />
         </DrawerContent>
       </Drawer>
-      <Box ml={{ base: 0, md: 60 }} transition='.3s ease'>
+      <Box ml={{ base: 0, md: isSidebarOpen ? 60 : 0 }} transition='.3s ease'>
         <Flex
           as='header'
           align='center'
@@ -97,11 +101,36 @@ export default function Index() {
           <IconButton
             aria-label='Menu'
             display={{ base: 'inline-flex', md: 'none' }}
-            onClick={onOpen}
+            onClick={() => {
+              onOpen()
+              setIsSidebarOpen(!isSidebarOpen) // Toggle sidebar visibility
+            }}
             icon={<FiMenu />}
             size='md'
           />
-
+          {isSidebarOpen ? (
+            <Button
+              mr={1100}
+              bg='white'
+              color='black'
+              border='1px solid gray'
+              borderRadius='10px'
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            >
+              X
+            </Button>
+          ) : (
+            <Button
+              mr={1300}
+              bg='white'
+              color='black'
+              border='1px solid gray'
+              borderRadius='10px'
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            >
+              <BsChevronBarRight />
+            </Button>
+          )}
           <Flex align='center'>
             {!isLoggedIn ? (
               <Flex
@@ -181,7 +210,7 @@ export default function Index() {
   )
 }
 
-const SidebarContent = () => (
+const SidebarContent = ({ isOpen }) => (
   <Box
     as='nav'
     pos='fixed'
@@ -195,10 +224,10 @@ const SidebarContent = () => (
     bg={useColorModeValue('white', 'gray.800')}
     borderColor={useColorModeValue('inherit', 'gray.700')}
     borderRightWidth='1px'
-    w='60'
+    w={isOpen ? '60' : '0'} // Set width to 0 when closed
   >
     <Flex px='4' py='5' align='center'>
-      <Icon as={FaTree} h={8} w={8} color="green" />
+      <Icon as={FaTree} h={8} w={8} color='green' />
       <Text
         fontSize='2xl'
         ml='2'
