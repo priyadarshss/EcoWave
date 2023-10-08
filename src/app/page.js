@@ -22,7 +22,7 @@ const theme = extendTheme({
 export default function Home() {
   return (
     <div style={{ backgroundColor: 'white' }}>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <SidebarWithHeader />
         {/* <Landing /> */}
         <Ledger />

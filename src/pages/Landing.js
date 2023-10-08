@@ -88,7 +88,7 @@ const HeroSection = () => {
               mb={{ base: 2, sm: 0 }}
               zIndex={5}
               lineHeight={1}
-              bgGradient='linear(to-l, #00d062, #009f65)'
+              bgGradient='linear(to-l, green, #009f65)'
               _hover={{
                 bgGradient: 'linear(to-l, #008040, #006533)',
                 opacity: 0.9,
