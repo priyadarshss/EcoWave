@@ -122,6 +122,7 @@ const Ledger = () => {
 
     return ethers.utils.formatEther(getUserXP)
   }
+  getTotalSupply()
 
   return (
     <Container
