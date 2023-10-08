@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import {
   Avatar,
   Box,
@@ -34,8 +34,6 @@ import { useEffect, useState } from 'react'
 import ToggleRow from './ToggleRow'
 import { Web3Auth } from '@web3auth/modal'
 import { useRouter } from 'next/navigation'
-import Ledger from './Ledger'
-
 
 export default function Index() {
   const { isOpen, onClose, onOpen } = useDisclosure()
@@ -43,7 +41,13 @@ export default function Index() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false) // Add state for sidebar visibility
   const [user, setUser] = useState(null)
   const router = useRouter()
-  console.log("aadas", router)
+  console.log('aadas', router)
+
+  const isDashboardPage = router.pathname === '/dashboard'
+  const isVisionPage = router.pathname === '/vision'
+  const isRewardsPage = router.pathname === '/rewards'
+
+  console.log('aaaaaaaa', router.pathname)
 
   const web3auth = new Web3Auth({
     clientId:
@@ -81,8 +85,6 @@ export default function Index() {
     }
   }, [])
 
-
-
   //   await web3auth.initModal()
 
   const handleLogin = async () => {
@@ -95,27 +97,25 @@ export default function Index() {
     }
   }
 
+  //   info
 
-//   info
+  const getUserInfo = async () => {
+    if (!web3auth) {
+      console.error('web3auth not initialized yet')
+      return
+    }
 
-   const getUserInfo = async () => {
-     if (!web3auth) {
-       console.error('web3auth not initialized yet')
-       return
-     }
+    try {
+      const data = await web3auth.getUserInfo()
+      setUser(data)
+      console.log('user info:', data)
 
-     try {
-       const data = await web3auth.getUserInfo()
-       setUser(data)
-       console.log('user info:', data)
-
-       // Save user data to local storage
-       localStorage.setItem('userData', JSON.stringify(data))
-     } catch (error) {
-       console.error('Error fetching user info:', error)
-     }
-   }
-
+      // Save user data to local storage
+      localStorage.setItem('userData', JSON.stringify(data))
+    } catch (error) {
+      console.error('Error fetching user info:', error)
+    }
+  }
 
   const logout = async () => {
     localStorage.removeItem('userData')
@@ -138,7 +138,6 @@ export default function Index() {
       console.error('Error during logout:', error)
     }
   }
-
 
   return (
     <Box as='section' bg='white' minH='100vh'>
@@ -177,7 +176,8 @@ export default function Index() {
           />
           {isSidebarOpen ? (
             <Button
-              mr={1100}
+              mr={user?.name ? 950 : 1100}
+              //   1100
               bg='white'
               color='black'
               border='1px solid gray'
@@ -188,7 +188,8 @@ export default function Index() {
             </Button>
           ) : (
             <Button
-              mr={1300}
+              mr={user?.name ? 1150 : 1300}
+              //   1300
               bg='white'
               color='black'
               border='1px solid gray'
@@ -223,7 +224,7 @@ export default function Index() {
               </Flex>
             ) : (
               <>
-                <HStack spacing={{ base: '0', md: '6' }} width="250px">
+                <HStack spacing={{ base: '0', md: '6' }} width='250px'>
                   <Icon color='gray.500' as={FaBell} cursor='pointer' />
                   <Flex alignItems={'center'}>
                     <Menu>
@@ -233,17 +234,14 @@ export default function Index() {
                         _focus={{ boxShadow: 'none' }}
                       >
                         <HStack>
-                          <Avatar
-                            size={'sm'}
-                            src={user.profileImage || ""}
-                          />
+                          <Avatar size={'sm'} src={user?.profileImage || ''} />
                           <VStack
                             display={{ base: 'none', md: 'flex' }}
                             alignItems='flex-start'
                             spacing='1px'
                             ml='2'
                           >
-                            <Text fontSize='sm'>{user.name || ""}</Text>
+                            <Text fontSize='sm'>{user?.name || ''}</Text>
                             <Text fontSize='xs' color='gray.600'>
                               User
                             </Text>
@@ -267,7 +265,8 @@ export default function Index() {
             )}
           </Flex>
         </Flex>
-        
+
+        {console.log('dashbbbb true?', isDashboardPage)}
 
         <Box as='main' p={14} minH='25rem' bg='white'>
           <Landing />
