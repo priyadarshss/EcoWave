@@ -21,7 +21,7 @@ const theme = extendTheme({
 
 export default function Home() {
   return (
-    <div style={{ backgroundColor: 'white' }}>
+    // <div style={{ backgroundColor: 'white' }}>
       <ChakraProvider theme={theme}>
         <SidebarWithHeader />
         {/* <Landing /> */}
@@ -30,6 +30,6 @@ export default function Home() {
         <Discount />
         <EmissionOffset />
       </ChakraProvider>
-    </div>
+    // </div>
   )
 }
