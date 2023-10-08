@@ -1,13 +1,176 @@
 'use client'
-import { Text } from '@chakra-ui/react';
-import React from 'react'
 
-const Landing = () => {
+import * as React from 'react'
+import {
+  chakra,
+  Container,
+  Stack,
+  HStack,
+  Text,
+  useColorModeValue,
+  Button,
+  Image,
+  Skeleton,
+  Box,
+  Link,
+  Icon,
+} from '@chakra-ui/react'
+// Here we have used react-icons package for the icons
+import { GoChevronRight } from 'react-icons/go'
+import { MdBolt } from 'react-icons/md'
+
+const HeroSection = () => {
   return (
-    <div>
-      <Text color="black">Home</Text>
-    </div>
+    <Container maxW='7xl' px={{ base: 6, md: 3 }} py={24} bg='white'>
+      <Stack direction={{ base: 'column', md: 'row' }} justifyContent='center'>
+        <Stack
+          direction='column'
+          spacing={6}
+          justifyContent='center'
+          maxW='480px'
+        >
+          {/* <HStack
+            as={Link}
+            p={1}
+            rounded='full'
+            fontSize='sm'
+            w='max-content'
+            bg={useColorModeValue('gray.300', 'gray.700')}
+          >
+            <Box
+              py={1}
+              px={2}
+              lineHeight={1}
+              rounded='full'
+              color='white'
+              bgGradient='linear(to-l, #0ea5e9,#2563eb)'
+            >
+              What&apos;s new
+            </Box>
+            <HStack spacing={1} alignItems='center' justifyContent='center'>
+              <Text lineHeight={1}>See our recent updates</Text>
+              <Icon as={GoChevronRight} w={4} h={4} />
+            </HStack>
+          </HStack> */}
+          <chakra.h1
+            fontSize='5xl'
+            lineHeight={1}
+            fontWeight='bold'
+            textAlign='left'
+          >
+            Build products faster <br />
+            <chakra.span color='teal'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit
+            </chakra.span>
+          </chakra.h1>
+          <Text
+            fontSize='1.2rem'
+            textAlign='left'
+            lineHeight='1.375'
+            fontWeight='400'
+            color='gray.500'
+          >
+            Dedicated to all companies wishing to measure, manage, and reduce
+            their CO2 emissions at an affordable price. Join the movement!
+          </Text>
+          <HStack
+            spacing={{ base: 0, sm: 2 }}
+            mb={{ base: '3rem !important', sm: 0 }}
+            flexWrap='wrap'
+          >
+            <chakra.button
+              w={{ base: '100%', sm: 'auto' }}
+              h={12}
+              px={6}
+              color='white'
+              size='lg'
+              rounded='md'
+              mb={{ base: 2, sm: 0 }}
+              zIndex={5}
+              lineHeight={1}
+              bgGradient='linear(to-l, #00d062, #009f65)'
+              _hover={{
+                bgGradient: 'linear(to-l, #008040, #006533)',
+                opacity: 0.9,
+              }}
+            >
+              <chakra.span> Explore EcoWave </chakra.span>
+              <Icon as={MdBolt} h={4} w={4} ml={1} />
+            </chakra.button>
+            <Box
+              d='flex'
+              justifyContent='center'
+              bg={useColorModeValue('white', 'gray.800')}
+              w={{ base: '100%', sm: 'auto' }}
+              border='1px solid'
+              borderColor='gray.300'
+              p={3}
+              lineHeight={1.18}
+              rounded='md'
+              boxShadow='md'
+              as={Link}
+              zIndex={55555555}
+            >
+              Discover More Stuffs
+            </Box>
+          </HStack>
+        </Stack>
+        <Box ml={{ base: 0, md: 5 }} pos='relative'>
+          <DottedBox />
+          <Image
+            w='100%'
+            h='100%'
+            minW={{ base: 'auto', md: '30rem' }}
+            objectFit='cover'
+            src={
+              'https://media.istockphoto.com/id/1344923073/photo/a-lake-in-the-shape-of-human-footprints-in-the-middle-of-a-lush-forest-as-a-metaphor-for-the.jpg?s=612x612&w=0&k=20&c=59g2smz0LLQ2cbW9eR4NZ3PaIpXavYk5g46Vb2vAEQU='
+            }
+            alt='hero'
+            borderRadius="20px"
+            fallback={<Skeleton />}
+          />
+        </Box>
+      </Stack>
+    </Container>
   )
 }
 
-export default Landing;
+function DottedBox() {
+  return (
+    <Box
+      position='absolute'
+      left='-45px'
+      top='-30px'
+      height='full'
+      maxW='700px'
+      zIndex={-1}
+    >
+      <svg
+        color='gray.200'
+        width='350'
+        height='420'
+        fill='none'
+      >
+        <defs>
+          <pattern
+            id='5d0dd344-b041-4d26-bec4-8d33ea57ec9b'
+            x='0'
+            y='0'
+            width='20'
+            height='20'
+            patternUnits='userSpaceOnUse'
+          >
+            <rect x='0' y='0' width='4' height='4' fill='currentColor'></rect>
+          </pattern>
+        </defs>
+        <rect
+          width='404'
+          height='404'
+          fill='url(#5d0dd344-b041-4d26-bec4-8d33ea57ec9b)'
+        ></rect>
+      </svg>
+    </Box>
+  )
+}
+
+export default HeroSection
