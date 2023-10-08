@@ -30,7 +30,7 @@ import { BsFolder2, BsCalendarCheck } from 'react-icons/bs'
 import { FiBell, FiChevronDown, FiMenu } from 'react-icons/fi'
 import { RiFlashlightFill } from 'react-icons/ri'
 import Landing from '../pages/Landing'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ToggleRow from './ToggleRow'
 import { Web3Auth } from '@web3auth/modal'
 
@@ -49,12 +49,28 @@ export default function Index() {
     },
   })
 
-  web3auth.initModal()
+  const initWeb3Auth = async () => {
+    try {
+      await web3auth.initModal();
+    } catch (error) {
+      console.error('Error initializing web3auth modal:', error);
+    }
+  };
 
-  const handleLogin = async () => {
-    await web3auth.connect()
-    setIsLoggedIn(true)
-  }
+  useEffect(() => {
+    initWeb3Auth()
+  }, [])
+
+//   await web3auth.initModal()
+
+   const handleLogin = async () => {
+    try {
+      await web3auth.connect();
+      setIsLoggedIn(true);
+    } catch (error) {
+      console.error('Error connecting to web3auth:', error);
+    }
+  };
 
   return (
     <Box as='section' bg='white' minH='100vh'>
