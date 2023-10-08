@@ -35,12 +35,6 @@ import {
 import Leaf from '../../public/images/Leaf.svg'
 import Image from 'next/image'
 import RewardTier from './RewardTier'
-const bent = require('bent')
-const getJSON = bent('GET', 'json')
-
-const { Framework } = require('@vechain/connex-framework')
-const { Driver, SimpleNet } = require('@vechain/connex-driver')
-const { ethers } = require('@vechain/ethers')
 
 const Ledger = () => {
   const [isRewardTierModalOpen, setRewardTierModalOpen] = React.useState(false)
