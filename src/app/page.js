@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import Image from 'next/image'
 import styles from './page.module.css'
 import { Text, Th, extendTheme } from '@chakra-ui/react'
@@ -9,6 +9,7 @@ import Ledger from '../components/Ledger'
 import Services from '../components/Services'
 import Discount from '../components/Discount'
 import EmissionOffset from '../components/EmissionOffset'
+import { useRouter } from 'next/navigation'
 
 const theme = extendTheme({
   colors: {
@@ -21,15 +22,13 @@ const theme = extendTheme({
 
 export default function Home() {
   return (
-    // <div style={{ backgroundColor: 'white' }}>
-      <ChakraProvider theme={theme}>
-        <SidebarWithHeader />
-        {/* <Landing /> */}
-        <Ledger />
-        <Services />
-        <Discount />
-        <EmissionOffset />
-      </ChakraProvider>
-    // </div>
+    <ChakraProvider theme={theme}>
+      <SidebarWithHeader />
+      {/* <Landing /> */}
+      {/* <Ledger /> */}
+      {/* <Services /> */}
+      {/* <Discount />
+      <EmissionOffset /> */}
+    </ChakraProvider>
   )
 }

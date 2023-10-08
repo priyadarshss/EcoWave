@@ -17,19 +17,24 @@ const ToggleRow = () => {
       maxW='6xl'
       px={{ base: 6, md: 3 }}
       py={24}
-      ml="10vw"
-      bg='black'
+      ml='10vw'
+      mb="150px"
+      bg='white'
       height='625px'
       color='white'
     >
+      <Text fontSize={36} fontWeight={700} color="black" textAlign="center" mb="100px">
+        We take everything into account to give you precise outcomes. And we do
+        it fast
+      </Text>
       <Stack direction='row' spacing={4} justifyContent='center'>
         <Box
           display='flex'
           flexDirection='row'
           borderRadius='20px'
-          border='1px solid white'
+          border='1px solid black'
           overflow='hidden'
-          mt="-35px"
+          mt='-35px'
         >
           {texts.map((text, index) => (
             <Box
@@ -44,7 +49,7 @@ const ToggleRow = () => {
               margin='10px'
               onClick={() => handleToggle(text)}
               backgroundColor={activeText === text ? '#00d062' : 'transparent'}
-              color={activeText === text ? 'black' : 'white'}
+              color={activeText === text ? 'black' : 'black'}
               fontWeight={700}
             >
               <Text>{text}</Text>

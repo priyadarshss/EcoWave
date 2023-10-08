@@ -1,3 +1,4 @@
+"use client"
 import {
   Avatar,
   Box,
@@ -23,7 +24,6 @@ import {
   MenuItem,
   MenuDivider,
 } from '@chakra-ui/react'
-// Here we have used react-icons package for the icons
 import { FaBell, FaTree } from 'react-icons/fa'
 import { AiOutlineTeam, AiOutlineHome } from 'react-icons/ai'
 import { BsFolder2, BsCalendarCheck, BsChevronBarRight } from 'react-icons/bs'
@@ -33,11 +33,17 @@ import Landing from '../pages/Landing'
 import { useEffect, useState } from 'react'
 import ToggleRow from './ToggleRow'
 import { Web3Auth } from '@web3auth/modal'
+import { useRouter } from 'next/navigation'
+import Ledger from './Ledger'
+
 
 export default function Index() {
   const { isOpen, onClose, onOpen } = useDisclosure()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false) // Add state for sidebar visibility
+  const [user, setUser] = useState(null)
+  const router = useRouter()
+  console.log("aadas", router)
 
   const web3auth = new Web3Auth({
     clientId:
@@ -60,7 +66,22 @@ export default function Index() {
 
   useEffect(() => {
     initWeb3Auth()
+
+    // Check for user data in local storage
+    const storedUserData = localStorage.getItem('userData')
+
+    if (storedUserData) {
+      // If user data exists, set the user state and mark as logged in
+      const parsedUserData = JSON.parse(storedUserData)
+      setUser(parsedUserData)
+      setIsLoggedIn(true)
+    } else {
+      // If no user data, show the login button
+      setIsLoggedIn(false)
+    }
   }, [])
+
+
 
   //   await web3auth.initModal()
 
@@ -68,10 +89,56 @@ export default function Index() {
     try {
       await web3auth.connect()
       setIsLoggedIn(true)
+      await getUserInfo() // await for getUserInfo to complete
     } catch (error) {
       console.error('Error connecting to web3auth:', error)
     }
   }
+
+
+//   info
+
+   const getUserInfo = async () => {
+     if (!web3auth) {
+       console.error('web3auth not initialized yet')
+       return
+     }
+
+     try {
+       const data = await web3auth.getUserInfo()
+       setUser(data)
+       console.log('user info:', data)
+
+       // Save user data to local storage
+       localStorage.setItem('userData', JSON.stringify(data))
+     } catch (error) {
+       console.error('Error fetching user info:', error)
+     }
+   }
+
+
+  const logout = async () => {
+    localStorage.removeItem('userData')
+    localStorage.removeItem('Web3Auth-cachedAdapter')
+
+    location.reload()
+    if (!web3auth || !web3auth.provider) {
+      console.log('Wallet is not connected')
+      return
+    }
+
+    // Web3Auth-cachedAdapter
+    // AWSALBCORS
+    // AWSALB
+
+    try {
+      await web3auth.logout()
+      setProvider(null)
+    } catch (error) {
+      console.error('Error during logout:', error)
+    }
+  }
+
 
   return (
     <Box as='section' bg='white' minH='100vh'>
@@ -156,7 +223,7 @@ export default function Index() {
               </Flex>
             ) : (
               <>
-                <HStack spacing={{ base: '0', md: '6' }}>
+                <HStack spacing={{ base: '0', md: '6' }} width="250px">
                   <Icon color='gray.500' as={FaBell} cursor='pointer' />
                   <Flex alignItems={'center'}>
                     <Menu>
@@ -168,7 +235,7 @@ export default function Index() {
                         <HStack>
                           <Avatar
                             size={'sm'}
-                            src='https://avatars2.githubusercontent.com/u/37842853?v=4'
+                            src={user.profileImage || ""}
                           />
                           <VStack
                             display={{ base: 'none', md: 'flex' }}
@@ -176,7 +243,7 @@ export default function Index() {
                             spacing='1px'
                             ml='2'
                           >
-                            <Text fontSize='sm'>Shubhank</Text>
+                            <Text fontSize='sm'>{user.name || ""}</Text>
                             <Text fontSize='xs' color='gray.600'>
                               User
                             </Text>
@@ -191,7 +258,7 @@ export default function Index() {
                         <MenuItem>Settings</MenuItem>
                         <MenuItem>Billing</MenuItem>
                         <MenuDivider />
-                        <MenuItem>Sign out</MenuItem>
+                        <MenuItem onClick={logout}>Sign out</MenuItem>
                       </MenuList>
                     </Menu>
                   </Flex>
@@ -200,6 +267,7 @@ export default function Index() {
             )}
           </Flex>
         </Flex>
+        
 
         <Box as='main' p={14} minH='25rem' bg='white'>
           <Landing />
@@ -244,16 +312,30 @@ const SidebarContent = ({ isOpen }) => (
       color='gray.600'
       aria-label='Main Navigation'
     >
-      <NavItem icon={AiOutlineHome}>Dashboard</NavItem>
-      <NavItem icon={AiOutlineTeam}>Team</NavItem>
-      <NavItem icon={BsFolder2}>Projects</NavItem>
-      <NavItem icon={BsCalendarCheck}>Calendar</NavItem>
+      <NavItem name='Home' icon={AiOutlineHome}>
+        Home
+      </NavItem>
+      <NavItem name='Dashboard' icon={AiOutlineTeam}>
+        Dashboard
+      </NavItem>
+      <NavItem name='Rewards' icon={BsFolder2}>
+        Rewards
+      </NavItem>
+      <NavItem name='Vision' icon={BsCalendarCheck}>
+        Vision
+      </NavItem>
     </Flex>
   </Box>
 )
 
-const NavItem = () => {
+const NavItem = ({ name }) => {
   const color = useColorModeValue('gray.600', 'gray.300')
+  const router = useRouter()
+
+  const handleClick = () => {
+    const route = name === 'Home' ? '/' : `/${name.toLowerCase()}`
+    router.push(route)
+  }
 
   return (
     <Flex
@@ -266,9 +348,12 @@ const NavItem = () => {
       transition='.15s ease'
       color={useColorModeValue('inherit', 'gray.400')}
       _hover={{
-        bg: 'white',
+        bg: 'gray.200',
         color: useColorModeValue('gray.900', 'gray.200'),
       }}
-    ></Flex>
+      onClick={handleClick}
+    >
+      {name}
+    </Flex>
   )
 }

@@ -83,7 +83,7 @@ const Ledger = () => {
       display='flex'
       justifyContent='center'
       alignItems='center'
-      mt="100px"
+      mt='100px'
     >
       <VStack>
         <HStack width='100%' display='flex' justifyContent='space-around'>
@@ -110,12 +110,13 @@ const Ledger = () => {
                 height: '70px',
               }}
             />
-            <Text fontSize={32} fontWeight={800} mb={10}>
-              Big Num
+            <Text fontSize={32} fontWeight={800} mb={5} textAlign='center'>
+              Leading the Way
             </Text>
             <Text fontSize={14} textAlign='center'>
-              As the saying goes, Greenly “walks the walk”. We measure our
-              emissions every year to continue making our own positive impact.
+              At EcoWave, we practice what we preach. We monitor our
+              environmental impact annually, ensuring a continuous commitment to
+              a sustainable future.
             </Text>
           </Box>
           {/* second box */}
@@ -149,14 +150,22 @@ const Ledger = () => {
               mt='-15px'
               mb='25px'
               textAlign='center'
-              color='gray.400'
+              color='orange.300'
               fontWeight={800}
             >
-              Silver
+              Bronze
             </Text>
             <Text fontSize={14} mb='10px' fontWeight={700} textAlign='center'>
-              Points left till the next tier:{' '}
-              <span style={{ color: 'orange', fontSize: '16px', marginLeft: "10px"}}>35 XP</span>
+              Points needed to reach the next tier:
+              <span
+                style={{
+                  color: 'orange.300',
+                  fontSize: '16px',
+                  marginLeft: '10px',
+                }}
+              >
+                35 XP
+              </span>
             </Text>
 
             <Stepper size='lg' index={activeStep} colorScheme='green'>
@@ -192,7 +201,7 @@ const Ledger = () => {
             </Button>
           </Box>
         </HStack>
-        <TableContainer mt="50px">
+        <TableContainer mt='50px'>
           <Box borderRadius='5px' overflow='hidden'>
             <Table
               variant='striped'
@@ -200,7 +209,9 @@ const Ledger = () => {
               borderWidth='2px'
               borderColor='black'
             >
-              <TableCaption>I can add a table name here blah blah</TableCaption>
+              <TableCaption mt='-1px'>
+                Environmental Activities Ledger
+              </TableCaption>
               <Thead>
                 <Tr>
                   <Th fontSize='18px'>s.no</Th>

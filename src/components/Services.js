@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Container, Stack, Box, Text, HStack } from '@chakra-ui/react'
+import { Container, Stack, Box, Text, HStack, Tooltip, Button } from '@chakra-ui/react'
 import Uber from '../../public/images/uber.svg'
 import Lyft from '../../public/images/lyft.svg'
 import Grab from '../../public/images/grab.svg'
@@ -50,8 +50,13 @@ const ToggleRow = () => {
           justifyContent='space-between'
           alignItems={'center'}
         >
-          <Box style={{ ...imageStyles }} _hover={increaseSizeOnHover}>
+          <Box display={'flex'} flexDirection='column' style={{ ...imageStyles }} _hover={increaseSizeOnHover}>
             <Image src={Uber} alt='uber' height={68} width={68} />
+            {/* <Tooltip label='Connect Uber' fontSize='md'>
+              <Button backgroundColor='green.500' variant='solid' mt="20px">
+                Connect
+              </Button>
+            </Tooltip> */}
           </Box>
           <Box
             style={{

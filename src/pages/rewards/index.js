@@ -16,9 +16,9 @@ const IMAGE =
 
 export default function ProductSimple() {
   return (
-    <Flex direction='column' mt='32px' width="75%" ml="200px">
+    <Flex direction='column' mt='32px' width='75%' ml='200px'>
       {/* New Flex container for discount text */}
-      <Text textAlign='center' fontSize='32px' fontWeight={700} mt='200px'>
+      <Text textAlign='center' fontSize='32px' fontWeight={700} mt='100px'>
         Discount Coupons
       </Text>
       <Flex justify='space-around' mt='50px' mb='100px'>

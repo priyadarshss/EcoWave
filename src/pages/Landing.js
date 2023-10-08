@@ -30,34 +30,52 @@ const HeroSection = () => {
           maxW='480px'
         >
           <chakra.h1
-            fontSize='5xl'
+            fontSize='40px'
+            lineHeight={1}
+            fontWeight='bold'
+            textAlign='center'
+          >
+            Drive Green, <br />
+            Earn Rewards. <br />
+            <br />
+            {/* <chakra.span
+              color='teal'
+              style={{ fontSize: '24px', textAlign: 'left' }}
+            >
+              Measure, manage, reduce: Join the sustainable movement!
+            </chakra.span> */}
+          </chakra.h1>
+          <chakra.h1
+            fontSize='26px'
+            color='teal'
             lineHeight={1}
             fontWeight='bold'
             textAlign='left'
           >
-            Build products faster <br />
-            <chakra.span color='teal'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit
-            </chakra.span>
+            Track your carbon footprint, make eco-friendly choices, and reap
+            rewards for a sustainable future world!
           </chakra.h1>
           <Text
-            fontSize='1.2rem'
-            textAlign='left'
+            fontSize='1rem'
+            textAlign='center'
             lineHeight='1.375'
             fontWeight='400'
             color='gray.500'
           >
-            Dedicated to all companies wishing to measure, manage, and reduce
-            their CO2 emissions at an affordable price. Join the movement!
+            Join us on the path to a greener!
           </Text>
           <HStack
             spacing={{ base: 0, sm: 2 }}
             mb={{ base: '3rem !important', sm: 0 }}
             flexWrap='wrap'
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
           >
             <chakra.button
               w={{ base: '100%', sm: 'auto' }}
               h={12}
+              mt='50px'
               px={6}
               color='white'
               size='lg'
@@ -79,7 +97,9 @@ const HeroSection = () => {
               justifyContent='center'
               bgGradient='linear(to-l, orange.300, orange.500)'
               // bg={useColorModeValue('orange.300', 'gray.800')}
+              h='50px'
               w={{ base: '100%', sm: 'auto' }}
+              mt='50px'
               border='1px solid'
               borderColor='gray.300'
               p={3}
@@ -87,8 +107,8 @@ const HeroSection = () => {
               rounded='md'
               boxShadow='md'
               as={Link}
-              zIndex={55555555}
-              color="white"
+              zIndex={1}
+              color='white'
             >
               Discover More Stuffs
             </Box>
