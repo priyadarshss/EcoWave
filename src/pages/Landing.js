@@ -65,7 +65,7 @@ const HeroSection = () => {
               mb={{ base: 2, sm: 0 }}
               zIndex={5}
               lineHeight={1}
-              bgGradient='linear(to-l, green, #009f65)'
+              bgGradient='linear(to-l, #00d062, #009f65)'
               _hover={{
                 bgGradient: 'linear(to-l, #008040, #006533)',
                 opacity: 0.9,
@@ -77,7 +77,8 @@ const HeroSection = () => {
             <Box
               d='flex'
               justifyContent='center'
-              bg={useColorModeValue('white', 'gray.800')}
+              bgGradient='linear(to-l, orange.300, orange.500)'
+              // bg={useColorModeValue('orange.300', 'gray.800')}
               w={{ base: '100%', sm: 'auto' }}
               border='1px solid'
               borderColor='gray.300'
@@ -87,6 +88,7 @@ const HeroSection = () => {
               boxShadow='md'
               as={Link}
               zIndex={55555555}
+              color="white"
             >
               Discover More Stuffs
             </Box>
@@ -102,7 +104,7 @@ const HeroSection = () => {
               'https://media.istockphoto.com/id/1344923073/photo/a-lake-in-the-shape-of-human-footprints-in-the-middle-of-a-lush-forest-as-a-metaphor-for-the.jpg?s=612x612&w=0&k=20&c=59g2smz0LLQ2cbW9eR4NZ3PaIpXavYk5g46Vb2vAEQU='
             }
             alt='hero'
-            borderRadius="20px"
+            borderRadius='20px'
             fallback={<Skeleton />}
           />
         </Box>
