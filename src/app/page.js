@@ -7,6 +7,8 @@ import Landing from '../pages/Landing'
 import SidebarWithHeader from '@/components/SidebarWithHeader'
 import Ledger from '../components/Ledger'
 import Services from '../components/Services'
+import Discount from '../components/Discount'
+import EmissionOffset from '../components/EmissionOffset'
 
 const theme = extendTheme({
   colors: {
@@ -25,6 +27,8 @@ export default function Home() {
         {/* <Landing /> */}
         <Ledger />
         <Services />
+        <Discount />
+        <EmissionOffset />
       </ChakraProvider>
     </div>
   )

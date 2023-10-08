@@ -89,6 +89,7 @@ const Ledger = () => {
           <Box
             display='flex'
             w='250px'
+            h='295px'
             position='relative'
             flexDirection='column'
             alignItems='center'
@@ -108,7 +109,7 @@ const Ledger = () => {
                 height: '70px',
               }}
             />
-            <Text fontSize={32} fontWeight={800} mb={4}>
+            <Text fontSize={32} fontWeight={800} mb={10}>
               Big Num
             </Text>
             <Text fontSize={14} textAlign='center'>
